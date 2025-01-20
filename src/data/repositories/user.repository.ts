@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { User } from 'src/users/entity/user.entity';
 import { Repository } from 'typeorm';
-import { User } from '../../user/entity/user.entity';
 
 interface IUserRepository {
   findAll(): Promise<User[]>;
-  findOne(id: string): Promise<User | null>;
+  findOneById(id: string): Promise<User | null>;
+  findOneByEmail(emails: string): Promise<User | null>;
   remove(id: string): void;
 }
 
@@ -14,14 +15,18 @@ export class UserRepository implements IUserRepository {
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,
-  ) {}
+  ) { }
 
   findAll(): Promise<User[]> {
     return this.usersRepository.find();
   }
 
-  findOne(id: string): Promise<User | null> {
+  findOneById(id: string): Promise<User | null> {
     return this.usersRepository.findOneBy({ id });
+  }
+
+  findOneByEmail(email: string): Promise<User | null> {
+    return this.usersRepository.findOneBy({ email })
   }
 
   remove(id: string): void {
