@@ -2,7 +2,7 @@ import { Controller, Get } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 import { UserRepository } from 'src/data/repositories/user.repository';
-import { User } from 'src/user/entity/user.entity';
+import { UserDto } from 'src/users/dto/user.dto';
 
 @ApiBearerAuth()
 @ApiTags('Users')
@@ -12,7 +12,7 @@ export class GetUsersController {
 
   @ApiOperation({ summary: 'Get users' })
   @Get()
-  getUsers(): Promise<User[] | null> {
+  getUsers(): Promise<UserDto[] | null> {
     return this.userRepository.findAll();
   }
 }
