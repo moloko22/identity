@@ -7,7 +7,5 @@ import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot(postgresConfig), UsersModule, AuthModule],
-  controllers: [],
-  providers: [],
 })
 export class AppModule { }
