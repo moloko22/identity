@@ -12,7 +12,7 @@ export class AuthController {
     @ApiOperation({ summary: 'Get access token' })
     @ApiBody({
         type: LoginDto, description: 'Email and password of the user', examples: {
-            'not-empty': {
+            'correct': {
                 value: {
                     email: "useremail@gmail.com",
                     password: "superpuperpassword"
