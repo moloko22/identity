@@ -7,14 +7,29 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: node:20
+    outputs:
+      cache-key: ${{ steps.set-key.outputs.key }}
     steps:
+      - name: Checkout files
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+
+      - name: Set up Node
+        uses: actions/setup-node@v3
         with:
           node-version: 20
-          cache: npm
 
-      - run: npm ci
+      - name: Generate cache key
+        id: set-key
+        run: echo "key=deps-${{ hashFiles('package-lock.json') }}"
+
+      - name: Restore cache
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ steps.set-key.outputs.key }}
+
+      - name: Install dependencies
+        run: npm i
 
   run-linter:
     needs: install-dependencies
@@ -22,10 +37,15 @@ jobs:
     container:
       image: node:20
     steps:
+      - name: Checkout files
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
 
-      - run: npm ci
+      - name: Restore node_modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ needs.install-dependencies.outputs.cache-key }}
+
       - run: npm run lint
 
   build:
@@ -34,8 +54,13 @@ jobs:
     container:
       image: node:20
     steps:
+      - name: Checkout files
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
 
-      - run: npm ci
+      - name: Restore node_modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ needs.install-dependencies.outputs.cache-key }}
+
       - run: npm run build
