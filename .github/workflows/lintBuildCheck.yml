@@ -8,13 +8,17 @@ jobs:
     container:
       image: node:20
     steps:
+      - uses: actions/checkout@v3
+
       - run: npm i
-      
+
   run-linter:
     runs-on: ubuntu-latest
     container:
       image: node:20
     steps:
+      - uses: actions/checkout@v3
+
       - run: npm run lint
 
   build:
@@ -22,4 +26,6 @@ jobs:
     container:
       image: node:20
     steps:
+      - uses: actions/checkout@v3
+
       - run: npm run build
