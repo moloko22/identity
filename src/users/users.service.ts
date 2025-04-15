@@ -4,9 +4,9 @@ import { User } from './entity/user.entity';
 
 @Injectable()
 export class UsersService {
-    constructor(private readonly userRepository: UserRepository) { }
+  constructor(private readonly userRepository: UserRepository) {}
 
-    async findUserByEmail(email: string): Promise<User | null> {
-        return await this.userRepository.findOneByEmail(email);
-    }
+  async findUserByEmail(email: string): Promise<User | null> {
+    return await this.userRepository.findOneByEmail(email);
+  }
 }

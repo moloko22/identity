@@ -9,7 +9,7 @@ import { UserDto } from 'src/users/dto/user.dto';
 @ApiTags('Users')
 @Controller('users')
 export class GetUsersController {
-  constructor(private readonly userRepository: UserRepository) { }
+  constructor(private readonly userRepository: UserRepository) {}
 
   @ApiOperation({ summary: 'Get users' })
   @Get()

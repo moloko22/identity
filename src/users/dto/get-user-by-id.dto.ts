@@ -1,3 +1,3 @@
 export type GetUserByIdDto = {
-    id: string;
-}
+  id: string;
+};

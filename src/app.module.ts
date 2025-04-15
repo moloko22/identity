@@ -8,4 +8,4 @@ import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [TypeOrmModule.forRoot(postgresConfig), UsersModule, AuthModule],
 })
-export class AppModule { }
+export class AppModule {}
