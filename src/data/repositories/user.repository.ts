@@ -15,7 +15,7 @@ export class UserRepository implements IUserRepository {
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,
-  ) { }
+  ) {}
 
   findAll(): Promise<User[]> {
     return this.usersRepository.find();
@@ -26,7 +26,7 @@ export class UserRepository implements IUserRepository {
   }
 
   findOneByEmail(email: string): Promise<User | null> {
-    return this.usersRepository.findOneBy({ email })
+    return this.usersRepository.findOneBy({ email });
   }
 
   remove(id: string): void {
