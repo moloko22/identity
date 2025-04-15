@@ -20,7 +20,7 @@ jobs:
 
       - name: Generate cache key
         id: set-key
-        run: echo "key=deps-${{ hashFiles('package-lock.json') }}"
+        run: echo "key=deps-${{ hashFiles('package-lock.json') }}" >> $GITHUB_ENV
 
       - name: Restore cache
         uses: actions/cache@v4
