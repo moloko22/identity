@@ -1,0 +1,25 @@
+name: Linter & Build check
+
+on: push
+
+jobs: 
+  install-dependencies:
+    runs-on: ubuntu-latest
+    container:
+      image: node:20
+    steps:
+      - run: npm i
+      
+  run-linter:
+    runs-on: ubuntu-latest
+    container:
+      image: node:20
+    steps:
+      - run: npm run lint
+
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: node:20
+    steps:
+      - run: npm run build
